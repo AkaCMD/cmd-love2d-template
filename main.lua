@@ -33,16 +33,12 @@ function love.load()
 end
 
 function love.update(dt)
-    if world then
-        world:update(dt)
-    end
+    world:update(dt)
 end
 
 function love.draw()
     love.graphics.print("Hello, Sailor!")
-    if world then
-        world:draw()
-    end
+   world:draw()
 end
 
 function love.keypressed(key)

@@ -45,7 +45,7 @@ end
 ---@param ... any Parameters to create the component
 ---@return Entity
 function Entity:createComponent(componentType, ...)
-    local success, componentClass = pcall(require, "src." .. componentType:lower())
+    local success, componentClass = pcall(require, "src.components." .. componentType:lower())
     if not success then
         success, componentClass = pcall(require, componentType)
         if not success then

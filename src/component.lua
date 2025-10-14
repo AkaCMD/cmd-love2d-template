@@ -10,10 +10,12 @@ end
 
 --- Called when component is added to an entity
 function Component:onAdd()
+    print(self.type .. " component added")
 end
 
 --- Called when component is removed from an entity
 function Component:onRemove()
+    print(self.type .. " component removed")
 end
 
 function Component:update(dt)
