@@ -38,7 +38,7 @@ end
 
 function love.draw()
     love.graphics.print("Hello, Sailor!")
-   world:draw()
+    world:draw()
 end
 
 function love.keypressed(key)
@@ -46,7 +46,7 @@ function love.keypressed(key)
     if player then
         local sprite = player:getComponent("Sprite")
         if key == "space" then
-            sprite.color = {math.random(), math.random(), math.random(), 1}
+            sprite.color = { math.random(), math.random(), math.random(), 1 }
         end
     end
 end
