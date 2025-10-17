@@ -24,20 +24,20 @@ function love.load()
     local World = require("src.world")
     world = World()
 
+    -- Create player with multiple text components
     local player = world:createEntity("player")
     player:createComponent("Sprite", "assets/duck.png")
     player.position = vec2(300, 300)
 
-    -- Create text entity (attached to entity)
-    local textEntity = world:createEntity("text")
-    textEntity:createComponent("Text", "Hello from Text Component!")
-    textEntity.position = vec2(100, 50)
+    -- Add ID text above player
+    local idTextId, idText = player:createComponent("Text", "Player ID: CMD")
+    idText:setColor({ 1, 1, 1, 1 })
+    idText:setOffset(0, -50) -- Above the player
 
-    -- Create standalone text (not attached to entity)
-    local Text = require("src.components.Text")
-    standaloneText = Text("Standalone Text!")
-    standaloneText:setColor(1, 0.5, 0) -- Orange color
-    standaloneText:setHAlign("left")
+    -- Add health text below player
+    local healthTextId, healthText = player:createComponent("Text", "Health: 100/100")
+    healthText:setColor({ 0, 1, 0, 1 })
+    healthText:setOffset(0, 50) -- Below the player
 
     -- Print world stats for debug
     world:printSnapshot()
@@ -48,13 +48,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.print("Hello, Sailor!")
     world:draw()
-
-    -- Draw standalone text
-    if standaloneText then
-        standaloneText:drawAt(200, 150)
-    end
 end
 
 function love.keypressed(key)

@@ -1,5 +1,21 @@
 ---@class Component
-local Component = class{}
+local Component = class {}
+
+--- Create a component instance by type name
+---@param componentType string The component type name
+---@param ... any Parameters to pass to component constructor
+---@return Component
+function Component.create(componentType, ...)
+    local success, componentClass = pcall(require, "src.components." .. componentType:lower())
+    if not success then
+        success, componentClass = pcall(require, componentType)
+        if not success then
+            error("Component class not found: " .. componentType)
+        end
+    end
+
+    return componentClass(...)
+end
 
 ---@param type_name string Identifier for the component type (e.g., "Health", "Physics")
 function Component:init(type_name)
