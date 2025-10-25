@@ -1,11 +1,12 @@
-local World = require("src.world")
+local Scene = require("src.scene")
 
----@class Pause
-local Pause = {}
+local Pause = class { __includes = Scene }
+
+function Pause:init()
+    Scene.init(self)
+end
 
 function Pause:enter()
-    self.world = World()
-
     -- Create pause text entity
     local pauseEntity = self.world:createEntity("pause_text")
     pauseEntity.position = vec2(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2)
@@ -18,14 +19,8 @@ function Pause:enter()
         :setVAlign("center")
 end
 
-function Pause:draw()
-    self.world:draw()
-end
-
 function Pause:keypressed(key)
     if key == "escape" then
-        self.world:clear()
-        self.world = nil
         sceneManager:pop()
     end
 end

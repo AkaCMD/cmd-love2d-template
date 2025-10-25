@@ -1,11 +1,12 @@
-local World = require("src.world")
+local Scene = require("src.scene")
 
----@class Gameplay
-local Gameplay = {}
+local Gameplay = class { __includes = Scene }
+
+function Gameplay:init()
+    Scene.init(self)
+end
 
 function Gameplay:enter()
-    self.world = World()
-
     -- Create player with multiple text components
     local player = self.world:createEntity("player")
     player:createComponent("Sprite", "assets/duck.png")
@@ -81,7 +82,7 @@ function Gameplay:keypressed(key)
     end
 
     if key == "escape" then
-        sceneManager:push(require("src.scenes.pause"))
+        sceneManager:push(require("src.scenes.pause")())
     end
 end
 

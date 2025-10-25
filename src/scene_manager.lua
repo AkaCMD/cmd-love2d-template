@@ -61,6 +61,12 @@ end
 
 function SceneManager:enter(next, ...)
     local previous = self._scenes[#self._scenes]
+
+    -- Cleanup previous scene entities if it has cleanup method
+    if previous and previous.cleanup then
+        previous:cleanup()
+    end
+
     self:emit("leave", next, ...)
     self._scenes[#self._scenes] = next
     self:emit("enter", previous, ...)
@@ -76,6 +82,12 @@ end
 function SceneManager:pop(...)
     local previous = self._scenes[#self._scenes]
     local next = self._scenes[#self._scenes - 1]
+
+    -- Cleanup popped scene entities
+    if previous and previous.cleanup then
+        previous:cleanup()
+    end
+
     self:emit("leave", next, ...)
     self._scenes[#self._scenes] = nil
     self:emit("resume", previous, ...)

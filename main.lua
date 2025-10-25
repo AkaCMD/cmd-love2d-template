@@ -22,7 +22,8 @@ sceneManager = require("src.scene_manager")()
 
 function love.load()
     sceneManager:hook()
-    sceneManager:enter(require("src.scenes.gameplay"))
+    local game = require("src.scenes.gameplay")()
+    sceneManager:enter(game)
 end
 
 function love.update(dt)
